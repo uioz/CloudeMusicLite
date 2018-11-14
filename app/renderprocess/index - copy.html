@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>hello world!</title>
+	<meta name="author" content="ASCll" />
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<link rel="stylesheet" type="text/css" href="css/normalize.css" />
+	<link rel="stylesheet" type="text/css" href="font/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="css/electronHank.css" />
+	<link rel="stylesheet" type="text/css" href="css/firstload.css" />
+	<link rel="stylesheet" type="text/css" href="css/animate.css">
+	<link rel="stylesheet" type="text/css" href="css/swiper-4.1.0.min.css">
+	<script>
+		// 重命名 Electron 提供的 require
+		window.nodeRequire = require;
+		delete window.require;
+		delete window.exports;
+		delete window.module;
+	</script>
+	<style>
+		.scrollcardslidecontainer {
+			margin: 1rem 0;
+			border: 2px solid rgb(167, 167, 167);
+			cursor: pointer;
+			transition: all 300ms;
+			background-color: #3c3c3c;
+			box-shadow: 4px 5px 0px 0px rgba(0, 0, 0, 0.6);
+		}
+
+		.scrollcardslidecontainer>.suptitle {
+			color: #fff;
+			width: 100%;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+
+		.scrollcardslidecontainer>img {
+			width: 100%;
+		}
+
+		.scrollcardslidecontainer:hover {
+			box-shadow: 4px 5px 15px -2px rgba(0, 0, 0, 0.6);
+		}
+
+		/* hankswiper将最新音乐的进度条移动到下方 */
+
+		#recommendationmusic>.swiper-pagination,#newdisc>.swiper-pagination{
+			position: static;
+			z-index: 0;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="backgroundcontainer">
+		<div class="foobarconatiner">
+			<!--这级定义三个水平方向的盒子-->
+			<div class="playerinterfacecard">
+				<!--播放器主界面盒子,考虑这里是否需要一个框架，因为使用一个固定大小的框架
+						框架使用overflow:auto子元素高度超出父元素可以使父元素大小不变的 情况下
+						开启滚动条，讨论这个问题的主要元婴是，这个卡片需要有上下两个区域，第二个区域
+						也就是播放界面下面的是歌曲的评论
+						结果:否决
+						原因：触发评论是点击而不是滚动条，而且使用滚动条会破坏界面的整洁性
+						过长的评论放在第二个区域中,而不是playerinterfacecard中
+					-->
+				<div class="playerinterfacemain">
+					<div class="discwarp">
+						<div class="discconatiner">
+							<div id="disc">
+
+							</div>
+							<div id="discmask">
+
+							</div>
+							<div id="disccover">
+
+							</div>
+							<div id="discmetaldot">
+
+							</div>
+						</div>
+						<div class="songinfmorationconatiner">
+							<div id="songsinformation">
+								<div id="songname" title="双击复制到粘贴板">
+									<div>Unknow</div>
+								</div>
+								<div id="album">
+									<div title="Need for Speed Most Wanted">专辑:
+										<a href="#">Need for Speed Most Wanted</a>
+									</div>
+								</div>
+								<div id="singer">
+									<div title="Silent Code">歌手:
+										<a href="#">Silent Code</a>
+									</div>
+								</div>
+								<div id="songsource">
+									<div title="Need for Speed Most Wanted (NFS17)">来源:
+										<a href="#">Need for Speed Most Wanted (NFS17)</a>
+									</div>
+								</div>
+							</div>
+							<div id="otherbuttons"></div>
+						</div>
+					</div>
+					<div id="lrcwarp">
+						<ul id="lyricscontainer">
+						</ul>
+					</div>
+					<div class="audiocontrols">
+						<div class="songrangewarp">
+							<div id="lefttime">00:00</div>
+							<input type="range" id="songrange" min="0" max="100" value="0" step="1" />
+							<div id="righttime">00:00</div>
+						</div>
+						<div class="songcontrolbuttongroupwarp">
+							<input type="range" class="volumeup" id="volumerange" min="0" max="50" value="25" step="1" />
+							<div class="songcontrolbuttongroup">
+								<div id="prevsong">
+									<span class="fa fa-lg fa-backward"></span>
+								</div>
+								<div id="playswitch">
+									<span class="fa fa-2x fa-play .playclass"></span>
+								</div>
+								<div id="nextsong">
+									<span class="fa fa-lg fa-forward"></span>
+								</div>
+							</div>
+							<div class="playmodeswitchwarp">
+								<ul id="playmodeswitch">
+									<li title="列表循环" class="hidden fa fa-lg fa-retweet" data-playmode="listcycle"></li>
+									<li title="单曲循环" class="hidden fa fa-lg fa-refresh" data-playmode="single"></li>
+									<li title="随机播放" class="hidden fa fa-lg fa-random" data-playmode="random"></li>
+									<li title="顺序播放" class="hidden fa fa-lg fa-list" data-playmode="order"></li>
+								</ul>
+							</div>
+						</div>
+						<audio id="realpower" src="" volume="1"></audio>
+					</div>
+				</div>
+				<div class="Songcomment"></div>
+			</div>
+			<div class="playlistcard fontfamily">
+				<!-- 使用fixed永远定位在顶端 -->
+				<div id="listnavbar">
+					<ul id="navbarbuttons">
+						<li data-type="homepage" class="navbarbuttonsclick">首页</li>
+						<li data-type="findpage">发现</li>
+						<li data-type="playlistpage">我的歌单</li>
+						<li data-type="localpage">本地管理</li>
+						<li data-type="searchpage">搜索</li>
+						<li data-type="aboutmepage">个人</li>
+					</ul>
+					<div id="quicklysearchboxcontainer">
+						<input type="search" id="searchbox">
+						<div id="searchbutton" class="fa fa-search"></div>
+					</div>
+				</div>
+				<!-- 储存卡片集合 -->
+				<div id="listmaincardcontainer">
+					<!-- 首页永远不删除仅仅是隐藏 -->
+					<div id="homepage" >
+						<div class="listcard">
+							<div class="themefont">
+								每日推荐
+								<span class="subtitle">根据您的听歌习惯推荐</span>
+							</div>
+							<div class="themecontainer">
+								<div class="blockbutton">
+									<span class="fa fa-feed fa-lg"></span>
+									<span>私人FM</span>
+								</div>
+								<div class="blockbutton">
+									<span class="fa fa-music fa-lg"></span>
+									<span>推荐歌曲</span>
+								</div>
+								<div class="blockbutton">
+									<span class="fa fa-list-ul fa-lg"></span>
+									<span>推荐歌单</span>
+								</div>
+							</div>
+						</div>
+						<div class="listcard">
+							<div class="themefont">
+								推荐歌单
+								<!-- <span class="subtitle">根据您的听歌习惯推荐</span> -->
+							</div>
+							<div class="themecontainer">
+								<div id="recommendationlistswiper" class="swiper-container">
+									<div class="swiper-wrapper">
+										<div class="swiper-slide recommendationlistslidecontainer">
+											<span class="fa fa-headphones">1354万</span>
+											<img src="./img/2018-01-29 1.jpg">
+											<p>热门推荐</p>
+											<div class="subtitle">
+												【 2017 YouTube收听量最高的欧美歌曲 】
+											</div>
+										</div>
+										<div class="swiper-slide recommendationlistslidecontainer">
+											<span class="fa fa-headphones">1354万</span>
+											<img src="./img/2018-01-29 2.jpg">
+											<p>热门推荐</p>
+											<div class="subtitle">
+												【 2017 YouTube收听量最高的欧美歌曲 】
+											</div>
+										</div>
+										<div class="swiper-slide recommendationlistslidecontainer">
+											<span class="fa fa-headphones">1354万</span>
+											<img src="./img/2018-01-29 3.jpg">
+											<p>热门推荐</p>
+											<div class="subtitle">
+												【 2017 YouTube收听量最高的欧美歌曲 】
+											</div>
+										</div>
+										<div class="swiper-slide recommendationlistslidecontainer">
+											<span class="fa fa-headphones">1354万</span>
+											<img src="./img/2018-01-29 4.jpg">
+											<p>热门推荐</p>
+											<div class="subtitle">
+												【 2017 YouTube收听量最高的欧美歌曲 】
+											</div>
+										</div>
+										<div class="swiper-slide recommendationlistslidecontainer">
+											<span class="fa fa-headphones">1354万</span>
+											<img src="./img/2018-01-29 5.jpg">
+											<p>热门推荐</p>
+											<div class="subtitle">
+												【 2017 YouTube收听量最高的欧美歌曲 】
+											</div>
+										</div>
+										<div class="swiper-slide recommendationlistslidecontainer">
+											<span class="fa fa-headphones">1354万</span>
+											<img src="./img/2018-01-29 6.jpg">
+											<p>热门推荐</p>
+											<div class="subtitle">
+												【 2017 YouTube收听量最高的欧美歌曲 】
+											</div>
+										</div>
+										<div class="swiper-slide recommendationlistslidecontainer">
+											<span class="fa fa-headphones">1354万</span>
+											<img src="./img/2018-01-29 7.jpg">
+											<p>热门推荐</p>
+											<div class="subtitle">
+												【 2017 YouTube收听量最高的欧美歌曲 】
+											</div>
+										</div>
+										<div class="swiper-slide recommendationlistslidecontainer">
+											<span class="fa fa-headphones">1354万</span>
+											<img src="./img/2018-01-29 8.jpg">
+											<p>热门推荐</p>
+											<div class="subtitle">
+												【 2017 YouTube收听量最高的欧美歌曲 】
+											</div>
+										</div>
+										<div class="swiper-slide recommendationlistslidecontainer">
+											<span class="fa fa-headphones">1354万</span>
+											<img src="./img/2018-01-29 9.jpg">
+											<p>热门推荐</p>
+											<div class="subtitle">
+												【 2017 YouTube收听量最高的欧美歌曲 】
+											</div>
+										</div>
+										<div class="swiper-slide recommendationlistslidecontainer">
+											<span class="fa fa-headphones">1354万</span>
+											<img src="./img/2018-01-29 10.jpg">
+											<p>热门推荐</p>
+											<div class="subtitle">
+												【 2017 YouTube收听量最高的欧美歌曲 】
+											</div>
+										</div>
+										<div class="swiper-slide recommendationlistslidecontainer">
+											<span class="fa fa-headphones">1354万</span>
+											<img src="./img/2018-01-29 11.jpg">
+											<p>热门推荐</p>
+											<div class="subtitle">
+												【 2017 YouTube收听量最高的欧美歌曲 】
+											</div>
+										</div>
+										<div class="swiper-slide recommendationlistslidecontainer">
+											<span class="fa fa-headphones">1354万</span>
+											<img src="./img/2018-01-29 12.jpg">
+											<p>热门推荐</p>
+											<div class="subtitle">
+												【 2017 YouTube收听量最高的欧美歌曲 】
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="blockbutton">
+									<span class="fa fa-th-large fa-lg"></span>
+									<span>获取更多</span>
+								</div>
+							</div>
+						</div>
+						<div class="listcard">
+							<div class="themefont">
+								最新音乐
+								<span class="subtitle">精选</span>
+							</div>
+							<div class="themecontainer">
+								<div id="recommendationmusic" class="swiper-container">
+									<div class="swiper-wrapper">
+										<div class="swiper-slide scrollcardslidecontainer">
+											<img src="./img/109951163117843822.jpg" alt="">
+											<p class="suptitle">Say Something</p>
+											<p class="subtitle">Justin Timberlake|Chris Stapleton</p>
+										</div>
+										<div class="swiper-slide scrollcardslidecontainer">
+											<img src="./img/109951163117386430.jpg" alt="">
+											<p class="suptitle">神龙妹子团</p>
+											<p class="subtitle">神龙妹子团</p>
+										</div>
+										<div class="swiper-slide scrollcardslidecontainer">
+											<img src="./img/109951163117843822.jpg" alt="">
+											<p class="suptitle">Say Something</p>
+											<p class="subtitle">Justin Timberlake|Chris Stapleton</p>
+										</div>
+										<div class="swiper-slide scrollcardslidecontainer">
+											<img src="./img/109951163117386430.jpg" alt="">
+											<p class="suptitle">神龙妹子团</p>
+											<p class="subtitle">神龙妹子团</p>
+										</div>
+										<div class="swiper-slide scrollcardslidecontainer">
+											<img src="./img/109951163117843822.jpg" alt="">
+											<p class="suptitle">Say Something</p>
+											<p class="subtitle">Justin Timberlake|Chris Stapleton</p>
+										</div>
+										<div class="swiper-slide scrollcardslidecontainer">
+											<img src="./img/109951163117386430.jpg" alt="">
+											<p class="suptitle">神龙妹子团</p>
+											<p class="subtitle">神龙妹子团</p>
+										</div>
+										<div class="swiper-slide scrollcardslidecontainer">
+											<img src="./img/109951163117843822.jpg" alt="">
+											<p class="suptitle">Say Something</p>
+											<p class="subtitle">Justin Timberlake|Chris Stapleton</p>
+										</div>
+										<div class="swiper-slide scrollcardslidecontainer">
+											<img src="./img/109951163117386430.jpg" alt="">
+											<p class="suptitle">神龙妹子团</p>
+											<p class="subtitle">神龙妹子团</p>
+										</div>
+										<div class="swiper-slide scrollcardslidecontainer">
+											<img src="./img/109951163117843822.jpg" alt="">
+											<p class="suptitle">Say Something</p>
+											<p class="subtitle">Justin Timberlake|Chris Stapleton</p>
+										</div>
+										<div class="swiper-slide scrollcardslidecontainer">
+											<img src="./img/109951163117386430.jpg" alt="">
+											<p class="suptitle">神龙妹子团</p>
+											<p class="subtitle">神龙妹子团</p>
+										</div>
+										<div class="swiper-slide scrollcardslidecontainer">
+											<img src="./img/109951163117843822.jpg" alt="">
+											<p class="suptitle">Say Something</p>
+											<p class="subtitle">Justin Timberlake|Chris Stapleton</p>
+										</div>
+										<div class="swiper-slide scrollcardslidecontainer">
+											<img src="./img/109951163117386430.jpg" alt="">
+											<p class="suptitle">神龙妹子团</p>
+											<p class="subtitle">神龙妹子团</p>
+										</div>
+									</div>
+									<!-- 如果需要分页器 -->
+									<div class="swiper-pagination"></div>
+								</div>
+							</div>
+						</div>
+						<div class="listcard">
+							<div class="themefont">
+								新碟上架
+								<span class="subtitle">热门</span>
+							</div>
+							<div class="themecontainer">
+								<div id="newdisc" class="swiper-container">
+									<div class="swiper-wrapper">
+										<div class="swiper-slide scrollcardslidecontainer">
+											<img src="./img/109951163126870920.jpg" alt="">
+											<p class="suptitle">Get Out</p>
+											<p class="subtitle">CHVRCHES</p>
+										</div>
+										<div class="swiper-slide scrollcardslidecontainer">
+											<img src="./img/109951163126166431.jpg" alt="">
+											<p class="suptitle">网易公关爆炸表演</p>
+											<p class="subtitle">PRCrew</p>
+										</div>
+										<div class="swiper-slide scrollcardslidecontainer">
+											<img src="./img/109951163126870920.jpg" alt="">
+											<p class="suptitle">Get Out</p>
+											<p class="subtitle">CHVRCHES</p>
+										</div>
+										<div class="swiper-slide scrollcardslidecontainer">
+											<img src="./img/109951163126166431.jpg" alt="">
+											<p class="suptitle">网易公关爆炸表演</p>
+											<p class="subtitle">PRCrew</p>
+										</div>
+										<div class="swiper-slide scrollcardslidecontainer">
+											<img src="./img/109951163126870920.jpg" alt="">
+											<p class="suptitle">Get Out</p>
+											<p class="subtitle">CHVRCHES</p>
+										</div>
+										<div class="swiper-slide scrollcardslidecontainer">
+											<img src="./img/109951163126166431.jpg" alt="">
+											<p class="suptitle">网易公关爆炸表演</p>
+											<p class="subtitle">PRCrew</p>
+										</div>
+										<div class="swiper-slide scrollcardslidecontainer">
+											<img src="./img/109951163126870920.jpg" alt="">
+											<p class="suptitle">Get Out</p>
+											<p class="subtitle">CHVRCHES</p>
+										</div>
+										<div class="swiper-slide scrollcardslidecontainer">
+											<img src="./img/109951163126166431.jpg" alt="">
+											<p class="suptitle">网易公关爆炸表演</p>
+											<p class="subtitle">PRCrew</p>
+										</div>
+										<div class="swiper-slide scrollcardslidecontainer">
+											<img src="./img/109951163126870920.jpg" alt="">
+											<p class="suptitle">Get Out</p>
+											<p class="subtitle">CHVRCHES</p>
+										</div>
+										<div class="swiper-slide scrollcardslidecontainer">
+											<img src="./img/109951163126166431.jpg" alt="">
+											<p class="suptitle">网易公关爆炸表演</p>
+											<p class="subtitle">PRCrew</p>
+										</div>
+									</div>
+									<!-- 分页器 -->
+									<div class="swiper-pagination"></div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<!-- 发现页面 -->
+					<div id="findpage" class="hidden">
+						<div class="listcard">
+							<div class="themefont">
+								排行榜
+								<span class="subtitle">最热音乐</span>
+							</div>
+							<div class="themecontainer">
+								<div class="blockbutton">
+									<span class="fa fa-music fa-lg"></span>
+									<span>歌曲排行</span>
+								</div>
+								<div class="blockbutton">
+									<span class="fa fa-user fa-lg"></span>
+									<span>歌手排行</span>
+								</div>
+							</div>
+						</div>
+						<div class="listcard">
+							<div class="themefont">
+								获取相似
+								<span class="subtitle">发现共性</span>
+							</div>
+							<div class="themecontainer">
+								<div class="blockbutton">
+									<span class="fa fa-music fa-lg"></span>
+									<span>获取相似歌单</span>
+								</div>
+								<div class="blockbutton">
+									<span class="fa fa-music fa-lg"></span>
+									<span>获取相似音乐</span>
+								</div>
+								<div class="blockbutton">
+									<span class="fa fa-music fa-lg"></span>
+									<span>获取相似歌手</span>
+								</div>
+							</div>
+						</div>
+						<div class="listcard">
+							<div class="themefont">
+								歌曲相关
+								<span class="subtitle">背后的故事</span>
+							</div>
+							<div class="themecontainer">
+								<div class="blockbutton">
+									<span class="fa fa-music fa-lg"></span>
+									<span>歌手介绍</span>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<!-- 歌单页面 -->
+					<div id="playlistpage" class="hidden">
+
+					</div>
+					<!-- 本地管理页面 -->
+					<div id="localpage" class="hidden">
+
+					</div>
+					<!-- 搜索页面 -->
+					<div id="searchpage" class="hidden">
+
+					</div>
+					<!-- 个人页面 -->
+					<div id="aboutmepage" class="hidden">
+
+					</div>
+
+				</div>
+			</div>
+			<div class="toobarcard">
+				<div class="controlbuttongroup">
+					<div class="closewindowbutton"></div>
+					<div class="maximize"></div>
+					<div class="minimize"></div>
+				</div>
+				<div class="messagesidebar"></div>
+				<div class="zoombutton"></div>
+			</div>
+		</div>
+	</div>
+	<script charset="utf-8" type="text/javascript" src="./js/jquery-3.2.1.min.js"></script>
+	<script charset="utf-8" type="text/javascript" src="./js/swiper-4.1.0.min.js"></script>
+	<script charset="utf-8" type="text/javascript" src="./js/viewcontroller.js"></script>
+	<script charset="utf-8" type="text/javascript" src="./js/ipccontroller.js"></script>
+	<script type="text/javascript">
+		document.getElementById('recommendationlistswiper').addEventListener('click',(event)=>{
+			console.log(event.path[1]);
+		});
+		var listswiper = new Swiper('#recommendationlistswiper', {
+			autoplay: true,
+			direction: 'horizontal',
+			speed: 1000,
+			grabCursor: true,
+			slidesPerView: 4,
+			slidesPerColumn: 2,
+			spaceBetween: 10,
+			effect: 'coverflow',
+			coverflowEffect: {
+				rotate: 5,
+				stretch: 0,
+				depth: 40,
+				modifier: 2,
+				slideShadows: false
+			},
+			// preventLinksPropagation: false//防止拖动冒泡到click事件上
+		});
+		var newmusicswiper = new Swiper('#recommendationmusic', {
+			// autoplay: true,
+			direction: 'horizontal',
+			speed: 1000,
+			// grabCursor: true,
+			slidesPerView: 3,
+			slidesPerColumn: 1,
+			spaceBetween: 10,
+			freeMode: true,
+			freeModeMomentumVelocityRatio: 1.5,//拖动移动距离倍数
+			pagination: {
+				el: '.swiper-pagination',
+				type: 'progressbar',
+			},
+		});
+		var newdiscswiper = new Swiper('#newdisc', {
+			// autoplay: true,
+			direction: 'horizontal',
+			speed: 1000,
+			// grabCursor: true,
+			slidesPerView: 3,
+			slidesPerColumn: 1,
+			spaceBetween: 10,
+			freeMode: true,
+			freeModeMomentumVelocityRatio: 1.5,//拖动移动距离倍数
+			pagination: {
+				el: '.swiper-pagination',
+				type: 'progressbar',
+			},
+		});
+	</script>
+</body>
+
+</html>

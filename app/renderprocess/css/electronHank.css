@@ -1,0 +1,19 @@
+
+/*这个样式表主要用来hank electron的样式
+ * 只hank但是不提供样式
+ * */
+/*例如 可拖动事件*/
+
+/*hank 提供的元素都不可以拖动，需要拖动的添加更高级别的选择器修改*/
+body,div{
+	-webkit-app-region: no-drag;
+}
+/*hank 文本选择，需要文本选择的添加更高级别的选择器修改*/
+body,div{
+	-webkit-user-select: none;
+}
+/*清除浮动*/
+.clearfix{
+	overflow: auto;
+	zoom: 1;
+}

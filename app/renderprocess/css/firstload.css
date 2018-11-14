@@ -1,0 +1,923 @@
+/*这个css文件主要负责第一次加载时的样式规则,其他的样式规则有可能延迟加载*/
+
+
+/*hank normalize*/
+a{
+	text-decoration: none;
+	color: rgba(12, 107, 114, 0.74);
+}
+a:active{
+	color: inherit;
+}
+/* 字体 */
+.fontfamily{
+	font-family: 微软雅黑;
+}
+
+.backgroundcontainer {
+	background-image: linear-gradient(135deg, #f7f7f7 0%, #e3e3e3 25%, #f7f5f5 45%, #ececec 69%, #ffffff 100%);
+	opacity: 1;
+}
+/* 光标类型 */
+.cursor-pointer{
+	cursor: pointer;
+}
+.cursor-normal{
+	cursor: default;
+}
+/*foobarconatiner用做播放器的外框*/
+
+.foobarconatiner {
+	height: 100vh;
+}
+
+.playerinterfacecard {
+	width: 528px;
+	/*44%*/
+}
+
+.playlistcard {
+	width: calc(100% - 552px);
+}
+
+.toobarcard {
+	width: 24px;
+}
+
+.playerinterfacecard,
+.playlistcard,
+.toobarcard {
+	height: 100%;
+	float: left;
+}
+
+.controlbuttongroup {
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	height: 75.1px;
+}
+
+.messagesidebar {
+	background-color: #dcdcdc;
+	/* -webkit-box-flex: 23; */
+	height: calc(100% - 100.14px);
+	-webkit-app-region: drag;
+}
+
+.zoombutton {
+	background-color: red;
+	height: 25.04px;
+	box-shadow: inset 4px 4px 14px -2px rgba(0, 0, 0, 0.45);
+}
+
+.closewindowbutton,
+.maximize,
+.minimize {
+	-webkit-box-flex: 1;
+	box-shadow: inset 8px 10px 8px -5px rgba(0, 0, 0, 0.38);
+	transition: background-color 250ms;
+	position: relative;
+	z-index: 0;
+}
+
+div.closewindowbutton {
+	background-color: #e60012;
+	box-shadow: inset 13px -10px 14px -10px rgba(0, 0, 0, 0.38);
+}
+
+.closewindowbutton:hover {
+	background-color: red;
+	z-index: 1;
+	box-shadow: 0 0 18px -2px red;
+}
+
+.maximize {
+	background-color: #eae41d;
+}
+
+.maximize:hover {
+	background-color: #fcff01;
+	z-index: 1;
+	box-shadow: 0 0 18px -2px #fcff01;
+}
+
+.minimize {
+	background-color: #15bb5f;
+}
+
+.minimize:Hover {
+	background-color: #0ae46b;
+	z-index: 1;
+	box-shadow: 0 0 18px -2px #0ae46b;
+}
+
+.playerinterfacemain {
+	width: 100%;
+	height: 100%;
+}
+
+
+/*小心浮动*/
+
+.discwarp {
+	width: 100%;
+    height: 297px;
+}
+
+.discconatiner,
+.songinfmorationconatiner {
+	float: left;
+	height: 100%;
+	position: relative;
+}
+
+.discconatiner {
+	width: 58%;
+}
+
+.songinfmorationconatiner {
+	width: 42%;
+}
+
+#disc,
+#discmask {
+	width: 287px;
+	height: 287px;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+#disc {
+	margin: 0 auto;
+	margin-top: 5px;
+	border: 3px solid rgba(22, 137, 255, 0.2);
+	border-radius: 287px;
+	background-image: url(../img/disc.png);
+	box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.57);
+}
+
+#discmask {
+	position: absolute;
+	background-image: url(../img/discmask.png);
+	top: 5px;
+	left: 9.163px;
+	z-index: 1;
+}
+
+#disccover {
+	z-index: 2;
+}
+
+#discmetaldot {
+	position: absolute;
+	z-index: 3;
+	background-image: url(../img/discmetaldot.png);
+	width: 28px;
+	height: 28px;
+	background-size: cover;
+	background-repeat: no-repeat;
+	/* margin: auto; */
+    top: 134.2px;
+    left: 137.6px;
+	/* bottom: 0;
+	right: 0; */
+}
+
+.songinfmorationconatiner>div,
+#songsinformation>div {
+	width: 100%;
+}
+
+#songsinformation {
+	font-family: "微软雅黑", sans-serif;
+	height: 70%;
+	overflow: hidden;
+}
+
+#songname {
+	height: 35%;
+	text-align: center;
+	padding-top: 15px;
+}
+
+#songname>div {
+    font-size: 1em;
+    /* background-color: rgba(136, 136, 136, 0.2);
+    box-shadow: 7px 7px 0px 2px rgba(171, 171, 171, 0.74); */
+    text-overflow: ellipsis;
+    overflow: hidden;
+	width: 95%;
+	line-height: 1.5em;
+	min-height: 1.5em;
+    white-space: nowrap;
+    text-overflow: clip;
+}
+
+#album,
+#singer,
+#songsource {
+	height: 10%;
+}
+
+#album>div,
+#singer>div,
+#songsource>div {
+	margin-left: 16px;
+	color: rgba(142, 142, 142, 0.84);
+	font-size: .8em;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.audiocontrols{
+	height: 130px;
+}
+.songrangewarp{
+	position: relative;
+	overflow: hidden;
+	height: 25%;
+}
+.songcontrolbuttongroupwarp{
+	position: relative;
+    height: 75%;
+}
+/*滑杆调整 http://blog.csdn.net/u013347241/article/details/51560290*/
+/*1 清除默认样式*/
+#songrange {
+    -webkit-appearance: none;
+    width: 400px;
+    border-radius: 10px;
+    margin: 0 auto;
+    margin-top: 16px;
+	display: block;
+	background: linear-gradient(90deg,  rgb(245, 96, 96) 0%, rgba(0, 0, 0, 0.1) 0%);
+	cursor: pointer;
+}
+#songrange::-webkit-slider-thumb {
+    -webkit-appearance: none;
+}
+/*2 给轨道添加样式*/
+#songrange::-webkit-slider-runnable-track {
+	height: 6px;
+    border-radius: 6px;
+    box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.47);
+}
+#songrange:focus {
+    outline: none;
+}
+/*3 给滑块添加样式*/
+#songrange::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 17px;
+    width: 17px;
+    margin-top: -5px;
+	border-radius: 50%;
+	background-image:url('../img/rangedot.png');
+	background-size: 150% 150%;
+	background-position: center center;
+	transition: all 300ms cubic-bezier(.01,1,.79,.98);
+	transform: scale(1,1);
+    box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.38);
+}
+/*4 给滑块添加动画 */
+#songrange::-webkit-slider-thumb:hover{
+    transform: scale(1.2,1.2);
+    box-shadow: 0px 0px 3px -1px #000;
+}
+/* 音量调节部分 */
+#volumerange{
+    position: absolute;
+    -webkit-appearance: none;
+    display: block;
+    width: 64px;
+    left: 50px;
+    top: 27px;
+	padding: 20px 17px;
+	background-color: transparent;
+	cursor: pointer;
+}
+#volumerange::-webkit-slider-thumb {
+    -webkit-appearance: none;
+}
+/* 轨道样式 +未触发时样式*/
+#volumerange::-webkit-slider-runnable-track{
+	height: 6px;
+    border-radius: 6px;
+	box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0);
+	transition: all 300ms;
+}
+#volumerange:focus {
+    outline: none;
+}
+/* 滑块样式 */
+#volumerange::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 14px;
+    width: 14px;
+    margin-top: -4px; /*使滑块超出轨道部分的偏移量相等*/
+	border-radius: 50% 50%;
+	border: 2px solid #fff;
+	box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, .6);
+	transition: all 300ms;
+}
+/* 音量标志切换颜色类 */
+.volumeup::-webkit-slider-thumb{
+	background-color: #f00;
+}
+.volumeoff::-webkit-slider-thumb{
+	background-color:rgb(125, 119, 119);
+}
+/* 动画部分 */
+#volumerange:hover::-webkit-slider-runnable-track{
+	box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.47);
+}
+#volumerange:hover::-webkit-slider-thumb{
+	border: 4px solid rgb(255, 72, 72);
+	background-color: #fff;
+}
+/* 滑杆两侧时间显示部分 */
+#lefttime,#righttime{
+	position: absolute;
+    top: 9.8px;
+	color: #8c8c8c;
+    text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.9);
+}
+#lefttime{
+	left: 4px;
+}
+#righttime{
+	right: 4px;
+}
+/* 歌词部分 */
+#lrcwarp{
+	height: calc(100% - 427px);
+    overflow: auto;
+}
+#lrcwarp::-webkit-scrollbar {
+	width: 7px;
+    border-radius: 7px;
+}
+#lrcwarp::-webkit-scrollbar-track {
+	background-color: rgba(191, 191, 191, 0.17);
+	box-shadow: inset 0 0 1px rgba(0,0,0,0.3);
+}
+#lrcwarp::-webkit-scrollbar-thumb{
+	background-color: rgb(224, 224, 224);
+    width: 7px;
+    border-radius: 7px;
+	transition: all 300ms;
+}
+#lrcwarp::-webkit-scrollbar-thumb:hover{
+	background-color: rgb(235, 61, 61);
+}
+/* 歌词不可见类 */
+.invisible>ul{
+	visibility: hidden;
+}
+#lyricscontainer {
+	width: 70%;
+	margin: 0 auto;
+    margin-top: 25%;
+	padding: 0;
+	list-style: none;
+	font-family: 微软雅黑;
+}
+#lyricscontainer>li {
+	text-align: center;
+	transition: color 300ms;
+	color: rgba(0, 0, 0, 0.57);
+}
+#lyricscontainer>li:last-child {
+    margin-bottom: 35%;
+}
+#lyricscontainer>li>p{
+	margin: 0;
+	padding-top: .5em;
+}
+#lyricscontainer>li>p+p {
+	font-size: .8em;
+}
+/* 用于滚动歌词颜色 */
+.lyricsrollingcolor{
+    color: rgb(39, 39, 39)!important;
+    text-shadow: -2px -2px 1px rgba(255, 255, 255, 0.78), 2px 2px 6px rgba(150, 141, 141, 0.95);
+}
+/* 音乐播放按钮控制组部分 */
+.songcontrolbuttongroup{
+	margin: 0 auto;
+    width: 50%;
+	height: 100%;
+	display: -webkit-box;
+	-webkit-box-pack: center;
+	-webkit-box-align: center;
+}
+.songcontrolbuttongroup>div{
+	position: relative;
+    border-radius: 50% 50%;
+    background-color: rgba(234, 36, 36, 0.88);
+    display: inline-block;
+	vertical-align: middle;
+	transition: all 300ms;
+	box-shadow: 1px 1px 5px 0px rgba(0,0,0,.6);
+	cursor: pointer;
+}
+.songcontrolbuttongroup>div>span{
+	position: absolute;
+	text-shadow: 1px 3px 0px rgba(0,0,0,.2);
+	color: #fff;
+}
+#prevsong,#nextsong{
+	-webkit-box-flex: 1;
+	width: 50px;
+	height: 50px;
+}
+/* 两侧按钮居中部分 */
+#prevsong>span{
+    margin-top: calc(50% - 7.5px);
+    margin-left: calc(50% - 13px);
+}
+#nextsong>span{
+    margin-top: calc(50% - 7.5px);
+	margin-left: calc(50% - 8px);
+}
+/* 覆盖中间按钮居中部分 */
+#playswitch>.fa-play{
+	margin-top: calc(50% - 16px);
+    margin-left: calc(50% - 9px);
+}
+.fa-pause{
+	margin-top: calc(50% - 16px);
+    margin-left: calc(50% - 13.5px);
+}
+#playswitch{
+	-webkit-box-flex: 2;
+    width: 80px;
+    height: 80px;
+    margin: 0 20px;
+}
+/* 三个按钮的动画 */
+#prevsong:hover{
+	width: 65px; 
+    height: 65px;
+    margin-left: 10px;
+}
+#nextsong:hover{
+	width: 65px; 
+    height: 65px;
+    margin-right: 10px;
+}
+#playswitch:hover{
+	margin:0 10px;
+}
+.songcontrolbuttongroup>div:active{
+	box-shadow: 0 0 0 rgba(0, 0, 0, 0.38);
+}
+/* 播放模式切换包围 +清除样式*/
+.playmodeswitchwarp{
+	position: absolute;
+    top: 42px;
+	right: 50px;
+	transition: all 100ms cubic-bezier(.29,1,.85,1);
+}
+#playmodeswitch{
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	width: 40px;
+	text-align: center;
+    color: #969696;
+}
+#playmodeswitch>li{
+	display: list-item;
+	cursor: pointer;
+}
+/* 用于播放模式切换的类 */
+.hidden{
+	display: none!important;
+}
+/* 播放模式切换动画 */
+.playmodeswitchwarp:hover{
+	will-change: transform;
+	transform: rotate(45deg);
+}
+/* 列表页面css */
+/* 列表导航栏 */
+#listnavbar{
+	position: fixed;
+	z-index: 100;
+    width: inherit;
+	height: 40px;
+	overflow: hidden;
+	padding-left: 20px;
+	box-shadow: 7px 3px 8px -2px rgba(0, 0, 0, 0.17);
+	border-bottom: 2px solid rgb(255, 255, 255);
+	background-image: linear-gradient(135deg, #f7f7f7 0%, #e3e3e3 25%, #f7f5f5 45%, #ececec 69%, #ffffff 100%);
+    background-attachment: fixed;
+}
+#navbarbuttons{
+	list-style: none;
+    padding: 0;
+	margin: 0;
+}
+#navbarbuttons>li,#navbarbuttons{
+    float: left;
+    margin-top: 7px;
+}
+#quicklysearchboxcontainer{
+    float: right;
+    margin-top: 12px;
+    margin-right: 22px;
+    border-radius: 24px;
+    height: 24px;
+    overflow: hidden;
+    width: 200px;
+    background-color: rgba(255, 255, 255, 0.58);
+    box-shadow: inset 0px 0px 10px 0px rgba(0,0,0,.2);
+}
+#searchbox{
+	height: inherit;
+    padding: 0;
+    margin: 0;
+    width: 80%;
+    margin-left: 10px;
+    border: none;
+    color: #989898;
+    background-color: transparent;
+}
+#searchbox:focus{
+	outline: none;
+}
+#searchbutton{
+    float: right;
+    width: 29px;
+    margin-top: 2px;
+    padding: 0;
+	border: 0;
+	color: #888;
+	cursor: pointer;
+}
+#navbarbuttons>li{
+	margin-left: 11px;
+    margin-right: 11px;
+	font-weight: lighter;	
+    color: rgba(0, 0, 0, 0.61);
+	cursor: pointer;
+    box-shadow: 0px 27px 8px -3px rgb(235, 61, 61);
+	transition: all 100ms;
+}
+#navbarbuttons>li:hover{
+	margin-top: 9px;
+	font-weight: normal;
+    box-shadow: 0px 27px 8px 5px rgb(235, 61, 61);
+}
+#navbarbuttons>li:active{
+	margin-top: 9px;
+	font-weight: normal;
+    box-shadow: 0px 27px 8px 5px rgb(235, 61, 61);
+}
+/* 选项点击后添加的类 */
+.navbarbuttonsclick{
+	margin-top: 9px!important;
+	font-weight: normal!important;
+    box-shadow: 0px 27px 8px 5px rgb(235, 61, 61)!important;
+}
+/* 主要列表卡片的容器 */
+#listmaincardcontainer{
+	width: 100%;
+    height: 100%;
+    overflow-y: auto;
+}
+/* 列表区域滑轨设置 */
+#listmaincardcontainer::-webkit-scrollbar{
+	width: 7px;
+}
+#listmaincardcontainer::-webkit-scrollbar-thumb{
+    background-color: rgba(255, 0, 0, 0.37);
+    border-radius: 7px;
+}
+#listmaincardcontainer::-webkit-scrollbar-thumb:hover{
+	background-color: rgba(255, 0, 0, 0.83);
+	border: 1px solid rgba(0, 0, 0, 0.59);
+    border-radius: 7px;
+}
+#listmaincardcontainer>div{
+	padding-top: 40px;
+}
+/* 列表卡片通用类 */
+.listcard{
+	margin: 0 auto;
+	margin-top: 10px;
+	width: 96%;
+	padding: 2% 2%;
+    background-color: rgb(251, 251, 251);
+    transition: all 200ms;
+}
+.listcard:hover,.blockbutton:hover{
+	box-shadow: 0px 1px 14px -3px rgba(0, 0, 0, 0.25);
+}
+.themefont{
+	font-size: 1.5rem;
+}
+.suptitle{
+    font-size: 0.9rem;
+	color: #000;
+	margin: .3rem 0;
+}
+.subtitle{
+	display: block;
+	font-size: 1rem;
+	color: #969696;
+	margin: .2rem 0;
+}
+.blockbutton{
+    display: inline-block;
+    width: 32.8%;
+    margin-top: 4px;
+	padding-left: 1rem;
+	font-weight: lighter;
+    height: 3em;
+    line-height: 3em;
+    background-color: whitesmoke;
+    box-shadow: 2px 5px 13px -8px rgba(60, 60, 60, 0.72);
+    border: 1px solid rgb(199, 199, 199);
+    border: 2px solid #dadada;
+    transition: all 200ms 50ms;
+    cursor: pointer;
+}
+}
+.blockbutton:active{
+	transform: scale(.95,.95);
+	
+}
+/* 推荐歌单专用类 */
+.recommendationlistslidecontainer {
+	position: relative;
+	overflow: hidden;
+}
+
+.recommendationlistslidecontainer>span {
+	position: absolute;
+	top: 0;
+	right: 0;
+	color: #fff;
+	z-index: 1;
+}
+
+.recommendationlistslidecontainer>span:before {
+	vertical-align: middle;
+}
+
+.recommendationlistslidecontainer>img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+.recommendationlistslidecontainer>.subtitle {
+	font-size: small;
+	margin: .2rem 0;
+	height: 2rem;
+	overflow: hidden;
+}
+
+.recommendationlistslidecontainer>p {
+	position: absolute;
+	top: -100%;
+	margin: 0;
+	left: 0;
+	right: 0;
+	text-align: center;
+	z-index: 10;
+	background: rgba(0, 0, 0, 0.34);
+	color: #fff;
+	transition: top 100ms cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.recommendationlistslidecontainer:hover>p {
+	top: 0%;
+}
+/* 最新音乐和新碟上架通用类 */
+.scrollcardslidecontainer {
+	margin: 1rem 0;
+	border: 2px solid rgb(167, 167, 167);
+	cursor: pointer;
+	transition: all 300ms;
+	background-color: #3c3c3c;
+	box-shadow: 4px 5px 0px 0px rgba(0, 0, 0, 0.6);
+}
+
+.scrollcardslidecontainer>.suptitle {
+	color: #fff;
+	width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.scrollcardslidecontainer>img {
+	width: 100%;
+}
+
+.scrollcardslidecontainer:hover {
+	box-shadow: 4px 5px 15px -2px rgba(0, 0, 0, 0.6);
+}
+/* hankswiper将最新音乐的进度条移动到下方 */
+
+#recommendationmusic>.swiper-pagination,#newdisc>.swiper-pagination{
+	position: static;
+	z-index: 0;
+}
+/* 我的歌单通用下拉列表类 */
+.autolistcontainer {
+	margin: .5rem 0;
+	outline: 1px solid rgb(208, 208, 208);
+	background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+	overflow: hidden;
+	transition: box-shadow 300ms;
+}
+.autolistcontainer:hover{
+	box-shadow: 2px 2px 6px -1px #d2d2d2;
+}
+.autolistcontainer .fa-heart {
+	color: #eb3d3d;
+}
+.autolistcontainer .suptitle span:last-child {
+	float: right;
+	margin-right: .5rem;
+	color: #9a9a9a;
+}
+.autolistcontainer .suptitle span:first-child{
+	margin-left: .5rem;
+}
+.autolistcontainer>ul{
+	margin: 0;
+	font-size: 0.8rem;
+	overflow: hidden;
+}
+/* 点击可扩展列表 */
+.autolist-column-4{
+	padding-left: 0;
+}
+.autolist-column-4>li{
+	padding-left: 0;
+	padding: .5em 0;
+}
+.autolist-column-4>li:nth-child(odd){
+    background-color: #ffffff;
+}
+/* 标题栏和非标题栏样式设置 */
+.autolist-column-4>li:nth-child(1){
+	color: #000;
+}
+.autolist-column-4>li+li{
+	color: #616161;;
+	transition: color 100ms;
+	background-color: #f3f3f3;
+}
+.autolist-column-4>li+li:hover{
+    color: #000000;
+    text-shadow: 2px 0px 4px #7e7e7e;
+}
+.autolist-column-4>li>div{
+	display: inline-block;
+}
+/* 不同列之间宽度设置 */
+.autolist-column-4>li>div:nth-child(1){
+	width: 23%;
+}  
+.autolist-column-4>li>div:nth-child(2){
+	width: 40%;
+}
+.autolist-column-4>li>div:nth-child(3){
+	width: 30%;
+}
+.autolist-column-4>li>div:nth-child(4){
+	width: 7%;
+}
+/* 不同列之间动画用于提示用户点击后产生的不同差异 */
+.autolist-column-4>li span:hover{
+	text-decoration: underline;
+}
+/* 歌单列表每行文本超出一行裁剪 */
+.autolist-column-4>li>div{
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap;
+}
+/* 本地管理列表样式 基本ul样式 */
+.autolist-row-2{
+	list-style: none;
+    padding-left: 0;
+}
+.autolist-row-2>li{
+	overflow: hidden;
+}
+.autolist-row-2>li:nth-child(odd){
+	background-color: #fcfcfc;
+}
+.autolist-row-2>li>.autolist-row-2-left,.autolist-row-2>li>.autolist-row-2-right{
+	font-weight: lighter;
+	width: 50%;
+	float: left;
+}
+.autolist-row-2>li>.autolist-row-2-right{
+	width: 50%;
+	float: right;
+}
+.autolist-row-2-right{
+	border-radius: 2px;
+}
+.autolist-row-2-right>div{
+	float: left;
+	text-align: center;
+	transition: all 200ms;
+}
+/* 不同行之间的样式区别 */
+#localplaylist .autolist-row-2>li:nth-child(odd)>.autolist-row-2-right{
+    color: #fff;
+    text-shadow: 0px 0px 1px black;
+}
+#localplaylist .autolist-row-2>li:nth-child(even)>.autolist-row-2-right{
+    color: #606060;
+}
+.autolist-row-2-right>div:hover{
+    text-shadow: 0px 0px 8px #797979;
+    border-left: 10px solid #e40011;
+    background-image: linear-gradient(to right, #dedede 22%,rgba(255, 255, 255, 0.72) 117%);
+}
+/* 覆盖移出按钮样式 */
+.autolist-row-2-right>div:last-child:hover{
+	border-left: none;
+	background-image: none;
+}
+
+
+.autolist-row-2-right>div:active{
+    box-shadow: inset 0px 0px 11px 0px rgb(181, 181, 181);
+}
+
+.autolist-row-2-right>div:nth-child(1),.autolist-row-2-right>div:nth-child(2),.autolist-row-2-right>div:nth-child(3){
+	width: 30%;
+}
+.autolist-row-2-right>div:nth-child(4){
+	background-color:#e40011;
+	width: 10%;
+}
+/* 移出按钮hover反色 */
+.autolist-row-2-right>div:nth-child(4):hover{
+	color: #fff;
+	box-shadow: inset 0 0 9px 2px rgba(0, 0, 0, 0.45);
+}
+/* 左边标题设置 */
+.autolist-row-2-left>div:hover{
+	text-decoration: #000 underline;
+}
+.autolist-row-2-left>div:nth-child(1){
+	font-size: 1.1rem;
+    margin-left: 0.4rem;
+}
+.autolist-row-2-left>div:nth-child(2),.autolist-row-2-left>div:nth-child(3){
+	margin-left: 0.4rem;
+    font-size: 0.7rem;
+}
+
+.autolist-row-2-right>div>span{
+    line-height: 45.6px;
+}
+/* 歌手名称和专辑副标题颜色减淡 */
+.autolist-row-2-left>div+div{
+    color: #9b9b9b;
+}
+/* 文件夹列表项样式 */
+.textoverflowhidden{
+	display: block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.autolist-row-2>li>.flag{
+	float: left;
+	height: 2rem;
+	line-height: 2rem;
+}
+.autolist-row-2>li>span:first-child{
+	width: 3%;
+    color: #979797;
+	text-indent: .3rem;
+}
+.autolist-row-2>li>.textoverflowhidden{
+	width: 92%;
+}
+.autolist-row-2>li>.cursor-pointer{
+	width: 5%;
+	text-align: center;
+    color: #fff;
+	background-color: #e40011;
+	transition: 200ms all;
+}
+.autolist-row-2>li>.cursor-pointer:hover{	
+	box-shadow: inset 1px 1px 14px rgba(0, 0, 0, 0.55);
+}
+/* 适用于警示的左边框颜色改变 */
+.border-left-attention{
+	border-left: 2px solid #e60012;
+}

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>this page for test audio</title>
+  <link rel="stylesheet" href="./swiper-4.1.0.min.css">
+  <script src="./jquery-3.2.1.min.js"></script>
+  <script src="./swiper-4.1.0.min.js"></script>
+  <style>
+    .swiper-container {
+      /* width: 500px;
+      height: 500px; */
+    }
+    .swiper-slide{
+      background-size: cover;
+      background-position: center center;
+      width: 500px;
+      height: 500px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="swiper-container">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide" style="background-image:url('./img/2018-01-29 1.jpg'); " ></div>
+      <div class="swiper-slide" style="background-image:url('./img/2018-01-29 10.jpg');"></div>
+      <div class="swiper-slide" style="background-image:url('./img/2018-01-29 11.jpg');"></div>
+      <div class="swiper-slide" style="background-image:url('./img/2018-01-29 12.jpg');"></div>
+      <div class="swiper-slide" style="background-image:url('./img/2018-01-29 13.jpg');"></div>
+      <div class="swiper-slide" style="background-image:url('./img/2018-01-29 14.jpg');"></div>
+      <div class="swiper-slide" style="background-image:url('./img/2018-01-29 15.jpg');"></div>
+      <div class="swiper-slide" style="background-image:url('./img/2018-01-29 16.jpg');"></div>
+      <div class="swiper-slide" style="background-image:url('./img/2018-01-29 17.jpg');"></div>
+      <div class="swiper-slide" style="background-image:url('./img/2018-01-29 18.jpg');"></div>
+      <div class="swiper-slide" style="background-image:url('./img/2018-01-29 19.jpg');"></div>
+      <div class="swiper-slide" style="background-image:url('./img/2018-01-29 2.jpg'); " ></div>
+      <div class="swiper-slide" style="background-image:url('./img/2018-01-29 21.jpg');"></div>
+      <div class="swiper-slide" style="background-image:url('./img/2018-01-29 22.jpg');"></div>
+      <div class="swiper-slide" style="background-image:url('./img/2018-01-29 23.jpg');"></div>
+      <div class="swiper-slide" style="background-image:url('./img/2018-01-29 24.jpg');"></div>
+      <div class="swiper-slide" style="background-image:url('./img/2018-01-29 25.jpg');"></div>
+      <div class="swiper-slide" style="background-image:url('./img/2018-01-29 26.jpg');"></div>
+      <div class="swiper-slide" style="background-image:url('./img/2018-01-29 27.jpg');"></div>
+      <div class="swiper-slide" style="background-image:url('./img/2018-01-29 28.jpg');"></div>
+      <div class="swiper-slide" style="background-image:url('./img/2018-01-29 29.jpg');"></div>
+      <div class="swiper-slide" style="background-image:url('./img/2018-01-29 3.jpg'); " ></div>
+      <div class="swiper-slide" style="background-image:url('./img/2018-01-29 31.jpg');"></div>
+      <div class="swiper-slide" style="background-image:url('./img/2018-01-29 32.jpg');"></div>
+      <div class="swiper-slide" style="background-image:url('./img/2018-01-29 33.jpg');"></div>
+      <div class="swiper-slide" style="background-image:url('./img/2018-01-29 34.jpg');"></div>
+      <div class="swiper-slide" style="background-image:url('./img/2018-01-29 35.jpg');"></div>
+      <div class="swiper-slide" style="background-image:url('./img/2018-01-29 36.jpg');"></div>
+      <div class="swiper-slide" style="background-image:url('./img/2018-01-29 37.jpg');"></div>
+      <div class="swiper-slide" style="background-image:url('./img/2018-01-29 38.jpg');"></div>
+      <div class="swiper-slide" style="background-image:url('./img/2018-01-29 39.jpg');"></div>
+    </div>
+    <!-- 如果需要分页器 -->
+    <div class="swiper-pagination"></div>
+  </div>
+</body>
+<script type="text/javascript">
+  let myswiper = new Swiper('.swiper-container', {
+    autoplay: true,
+    // loop: true,
+    direction: 'horizontal',
+    speed: 1000,
+    grabCursor: true,
+    pagination: {
+      el: '.swiper-pagination'
+    },
+    slidesPerView:3,
+    slidesPerColumn:2,
+    spaceBetween:10,
+    effect:'coverflow',
+    coverflowEffect: {
+      rotate:10,
+      stretch: 0,
+      depth: 40,
+      modifier: 2,
+      slideShadows: true
+    }
+  });
+  myswiper.on('click',(event)=>{
+    console.log(event);
+  });
+</script>
+
+</html>

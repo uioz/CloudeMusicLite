@@ -1,0 +1,123 @@
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>Document</title>
+
+		<style type="text/css">
+			* {
+				/*margin: 0;
+				padding: 0;*/
+				box-sizing: border-box;
+			}
+			
+			.game {
+				width: 100%;
+				height: 200px;
+				display: -webkit-box;
+				background: yellow;
+				-webkit-box-orient: horizontal;
+				-webkit-box-align: center;
+			}
+			
+			section {
+				height: 70%;
+			}
+			
+			.one {
+				background: aqua;
+				-webkit-box-flex: 2;
+			}
+			
+			.two {
+				background: blue;
+				-webkit-box-flex: 1;
+				margin: 0 10px;
+			}
+			
+			.three {
+				background: red;
+				-webkit-box-flex: 1;
+			}
+		</style>
+	</head>
+
+	<body>
+		<h1>本页面测试flex布局</h1>
+		<h2>参考内容来自于<a href="http://www.zhangxinxu.com/wordpress/2010/12/css-box-flex%E5%B1%9E%E6%80%A7%EF%BC%8C%E7%84%B6%E5%90%8E%E5%BC%B9%E6%80%A7%E7%9B%92%E5%AD%90%E6%A8%A1%E5%9E%8B%E7%AE%80%E4%BB%8B/" target="_blank">click me!</a></h2>
+		<br>
+		<br>
+		<br>
+		<br>
+		<div class="container">
+			<article class="game">
+				<section class="one">1</section>
+				<section class="two">2</section>
+				<section class="three">3</section>
+
+			</article>
+
+		</div>
+
+		<div class="result">
+			<h3>经过测试盒子模型目前必须添加浏览器前缀</h3>
+			<h4>进过测试有如下结果</h4>
+			<ul>
+				<li>想要启动盒子效果父元素和子元素必须添加一种属性</li>
+				<li>父元素为display:-webkit-box</li>
+				<li>子元素必须使用-webkit-box-flex:数字|px指定获取父元素的空间</li>
+				<li>
+					而父元素有如下几个可使用的样式
+					<ol>
+						<li>box-orient规定子元素在父元素中的排列顺序，比如横着排或竖着排
+							<ol>
+								<li>horizontal | inline-axis |横着排</li>
+								<li>vertical | block-axis | 竖着排</li>
+								<li>inherit</li>
+							</ol>
+						</li>
+
+						<li>
+							box-direction用于确定子元素的排列顺序,如正常顺序1,2,3,4,5，反向顺序5,4,3,2,1
+							<ol>
+								<li>nomal默认顺序</li>
+								<li>reverse反向排序</li>
+								<li>inherit</li>
+							</ol>
+						</li>
+						<li>
+							box-align指定子元素纵向的对齐方式,如垂直对齐，左对齐
+							<ol>
+								<li>start顶边对齐(相对于box-align)</li>
+								<li>end底部对齐</li>
+								<li>center垂直居中</li>
+								<li>baseline底线对齐</li>
+								<li>stretch默认值，上下对齐</li>
+							</ol>
+						</li>
+						<li>
+							box-pack指定元素经的横向对齐方式,换句话説就是利用父级的剩余空间
+							<ol>
+								<li>start左对齐</li>
+								<li>end右对齐</li>
+								<li>center居中对齐</li>
+								<li>justify两端对齐</li>
+							</ol>
+						</li>
+						<li>
+							box-lines用来指定子元素可否换行显示，如果不换行将会超出父元素
+							<ol>
+								<li>single表示死活不换行</li>
+								<li>multiple表示换行</li>
+							</ol>
+						</li>
+						<li>此处保留了两个不常用的属性详情看链接最后</li>
+					</ol>
+				</li>
+			</ul>
+		</div>
+	</body>
+
+</html>

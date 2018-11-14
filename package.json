@@ -1,0 +1,15 @@
+{
+  "name": "PureWebMusicPlayer",
+  "version": "0.0.1",
+  "description": "beta 1",
+  "main": "./app/app.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^1.7.9"
+  },
+  "dependencies": {
+    "nedb": "^1.8.0"
+  }
+}

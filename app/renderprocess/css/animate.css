@@ -1,0 +1,151 @@
+/*本文件存放css动画*/
+
+/*旋转动画,适用于disc disccover discmateldot*/
+
+@keyframes xuan {
+	from{
+		will-change: transform;
+		transform: rotate(0deg);
+	}
+	to{
+		will-change: transform;
+		transform: rotate(360deg);
+	}
+}
+
+#disc{
+	animation: xuan 10s linear infinite;
+}
+
+/*闪亮动画适用于discmask*/
+@keyframes shan{
+	10%{opacity:1;}
+	20%{opacity:.89;}
+	30%{opacity:.93;}
+	40%{opacity:.88;}
+	50%{opacity:.84;}
+	60%{opacity:.91;}
+	70%{opacity:.94;}
+	80%{opacity:.85;}
+	90%{opacity:.89;}
+   100%{opacity:.95;}
+}
+
+/*#discmask{
+	transform: translateZ(0);
+	animation: shan 2s linear infinite;
+}*/
+
+/* 用于切换模式消失的动画 */
+.fadeout{
+	animation: fadeout 100ms forwards;
+}
+@keyframes fadeout {
+	from{
+		opacity: 1;
+	}
+	to{
+		opacity: 0;
+	}
+}
+/* 用于切换模式出现的动画 */
+.fadein{
+	animation: fadein 100ms forwards;
+}
+@keyframes fadein {
+	from{
+		opacity: 0;
+	}
+	to{
+		opacity: 1;
+	}
+}
+/* 用于列表主页面卡片的禁止触摸和模糊 */
+.tabpagedonttouch{
+	will-change: filter opacity;
+	pointer-events: none;
+	animation: blur 100ms forwards;
+}
+@keyframes blur {
+	from{
+		filter: blur(0);
+	}
+	to{
+		filter: blur(4px);
+	}
+}
+.fadeoutandhidden{
+	animation: fadeouthidden 100ms forwards;
+}
+@keyframes fadeoutandhidden {
+	0%{
+		opacity: 1;
+	}
+	99%{
+		opacity: 0;
+	}
+	100%{
+		opacity: 0;
+		display: none;
+	}
+}
+/* 用于歌单内容展开的动画 */
+.playlistopen{
+	overflow: hidden;
+	transform-origin: center top;
+	animation:200ms playlistopen linear forwards;
+}
+@keyframes playlistopen{
+		from{
+			transform: scaleY(0);
+		}
+		99%{
+			transform: scaleY(1);
+		}
+		100%{
+			height: auto;
+		}
+}
+/* 用于歌单内容关闭的动画 */
+.playlistclosed{
+	overflow: hidden;
+	transform-origin: center top;
+	animation:260ms playlistclosed linear forwards;
+}
+@keyframes playlistclosed{
+	from{
+		
+	}
+	70%{
+		transform: scaleY(0);
+	}
+	100%{
+		height: 0px;
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+}
+/* 歌单列表打开箭头的动画类 */
+.palylistmarkopen{
+	animation: 300ms palylistmarkopen forwards ;
+}
+@keyframes palylistmarkopen{
+	from{
+
+	}
+	to{
+		transform: rotate(-90deg);
+	}
+}
+/* 歌单列表关闭箭头的动画类 */
+.palylistmarkclosed{
+	animation: 300ms palylistmarkclosed forwards ;
+}
+@keyframes palylistmarkclosed{
+	from{
+		transform: rotate(-90deg);
+	}
+	to{
+		transform: rotate(0deg);
+	}
+}

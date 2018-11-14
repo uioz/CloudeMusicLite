@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>this page for test</title>
+    <script src="./js/jquery-3.2.1.min.js"></script>
+    <style>
+    </style>
+</head>
+
+<body>
+    <ul id="game">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li id="what"></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+
+
+    <script>
+        var test=['赵','鑫','波','what','the','fuck','国','中']
+        var BCP47code='zh-CN';
+        var obj= { ignorePunctuation: true };
+        test.sort((param1,param2)=>{
+            return param1.localeCompare(param2,BCP47code,obj);
+        });
+        console.log(test)
+    </script>
+</body>
+
+</html>
