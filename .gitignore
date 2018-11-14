@@ -65,3 +65,4 @@ typings/
 .next
 
 test/electron-quick-start
+test/audiotest
